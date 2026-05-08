@@ -9,6 +9,7 @@ import PartyList from './pages/party/PartyList'
 import CustomerList from './pages/party/CustomerList'
 import ProductList from './pages/product/ProductList'
 import ProductTypeList from './pages/product/ProductTypeList'
+import AccountList from './pages/account/AccountList'
 
 function Dashboard() {
   const [health, setHealth] = useState<{ status: string, service: string, version: string } | null>(null);
@@ -71,6 +72,7 @@ function App() {
             <Link to="/party/customers">Customers</Link>
             <Link to="/products">Products</Link>
             <Link to="/product-types">Product Types</Link>
+            <Link to="/accounts">Accounts</Link>
           </nav>
         </header>
 
@@ -83,6 +85,7 @@ function App() {
             <Route path="/party/customers" element={<CustomerList />} />
             <Route path="/products" element={<ProductList />} />
             <Route path="/product-types" element={<ProductTypeList />} />
+            <Route path="/accounts" element={<AccountList />} />
           </Routes>
         </main>
       </div>

@@ -36,6 +36,21 @@ public class SecurityIntegrationTest {
     @MockBean
     private PermissionRepository permissionRepository;
 
+    @MockBean
+    private com.ufos.platform.modules.enterprise.repository.LegalEntityRepository legalEntityRepository;
+
+    @MockBean
+    private com.ufos.platform.modules.enterprise.repository.BranchRepository branchRepository;
+
+    @MockBean
+    private com.ufos.platform.modules.enterprise.repository.CurrencyRepository currencyRepository;
+
+    @MockBean
+    private com.ufos.platform.modules.enterprise.repository.BusinessCalendarRepository businessCalendarRepository;
+
+    @MockBean
+    private com.ufos.platform.modules.enterprise.repository.CalendarHolidayRepository calendarHolidayRepository;
+
     @Test
     public void testPublicEndpoints() throws Exception {
         mockMvc.perform(get("/api/v1/health")).andExpect(status().isOk());

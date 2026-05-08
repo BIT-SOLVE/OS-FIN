@@ -5,6 +5,8 @@ import UserStatus from './components/UserStatus'
 import { apiClient } from './api/client'
 import LegalEntityList from './pages/enterprise/LegalEntityList'
 import CurrencyList from './pages/enterprise/CurrencyList'
+import PartyList from './pages/party/PartyList'
+import CustomerList from './pages/party/CustomerList'
 
 function Dashboard() {
   const [health, setHealth] = useState<{ status: string, service: string, version: string } | null>(null);
@@ -63,6 +65,8 @@ function App() {
             <Link to="/">Dashboard</Link>
             <Link to="/enterprise/legal-entities">Legal Entities</Link>
             <Link to="/enterprise/currencies">Currencies</Link>
+            <Link to="/party/parties">Parties</Link>
+            <Link to="/party/customers">Customers</Link>
           </nav>
         </header>
 
@@ -71,6 +75,8 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/enterprise/legal-entities" element={<LegalEntityList />} />
             <Route path="/enterprise/currencies" element={<CurrencyList />} />
+            <Route path="/party/parties" element={<PartyList />} />
+            <Route path="/party/customers" element={<CustomerList />} />
           </Routes>
         </main>
       </div>

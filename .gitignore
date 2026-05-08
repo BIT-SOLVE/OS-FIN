@@ -12,6 +12,7 @@
 # Logs
 *.log
 logs/
+**/logs/
 
 # OS files
 .DS_Store
@@ -21,3 +22,10 @@ Thumbs.db
 .env*.local
 .env
 !.env.example
+
+# Temporary files
+test_results.txt
+test_output.txt
+test_final.txt
+test_report.txt
+test_summary.txt

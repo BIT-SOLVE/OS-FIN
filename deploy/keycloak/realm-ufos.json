@@ -1,0 +1,120 @@
+{
+  "realm": "ufos",
+  "enabled": true,
+  "roles": {
+    "realm": [
+      {
+        "name": "UFOS_ADMIN",
+        "description": "Administrator role"
+      },
+      {
+        "name": "UFOS_OPERATOR",
+        "description": "Operator role"
+      },
+      {
+        "name": "UFOS_AUDITOR",
+        "description": "Auditor role"
+      },
+      {
+        "name": "UFOS_VIEWER",
+        "description": "Viewer role"
+      }
+    ]
+  },
+  "groups": [],
+  "clients": [
+    {
+      "clientId": "ufos-web",
+      "enabled": true,
+      "publicClient": true,
+      "redirectUris": [
+        "http://localhost:5173/*"
+      ],
+      "webOrigins": [
+        "http://localhost:5173"
+      ],
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true
+    },
+    {
+      "clientId": "ufos-api",
+      "enabled": true,
+      "bearerOnly": false,
+      "publicClient": false,
+      "secret": "ufos-api-secret",
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": true
+    }
+  ],
+  "users": [
+    {
+      "username": "admin.user",
+      "enabled": true,
+      "email": "admin@ufos.platform",
+      "firstName": "Admin",
+      "lastName": "User",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "UFOS_ADMIN"
+      ]
+    },
+    {
+      "username": "operator.user",
+      "enabled": true,
+      "email": "operator@ufos.platform",
+      "firstName": "Operator",
+      "lastName": "User",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "UFOS_OPERATOR"
+      ]
+    },
+    {
+      "username": "auditor.user",
+      "enabled": true,
+      "email": "auditor@ufos.platform",
+      "firstName": "Auditor",
+      "lastName": "User",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "UFOS_AUDITOR"
+      ]
+    },
+    {
+      "username": "viewer.user",
+      "enabled": true,
+      "email": "viewer@ufos.platform",
+      "firstName": "Viewer",
+      "lastName": "User",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "UFOS_VIEWER"
+      ]
+    }
+  ]
+}

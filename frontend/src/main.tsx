@@ -2,9 +2,14 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import { initKeycloak } from './auth/keycloak'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const root = createRoot(document.getElementById('root')!);
+
+initKeycloak(() => {
+  root.render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  )
+});

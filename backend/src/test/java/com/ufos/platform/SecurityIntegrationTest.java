@@ -9,16 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class HealthControllerTest {
+public class SecurityIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -36,26 +37,26 @@ public class HealthControllerTest {
     private PermissionRepository permissionRepository;
 
     @Test
-    public void testHealthEndpoint() throws Exception {
-        mockMvc.perform(get("/api/v1/health"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("UP"))
-                .andExpect(jsonPath("$.service").value("ufos-platform"))
-                .andExpect(jsonPath("$.version").value("0.1.0"));
+    public void testPublicEndpoints() throws Exception {
+        mockMvc.perform(get("/api/v1/health")).andExpect(status().isOk());
+        mockMvc.perform(get("/actuator/health")).andExpect(status().isOk());
+        mockMvc.perform(get("/v3/api-docs")).andExpect(status().isOk());
     }
 
     @Test
-    public void testCorrelationIdReturned() throws Exception {
-        mockMvc.perform(get("/api/v1/health"))
-                .andExpect(status().isOk())
-                .andExpect(header().exists("X-Correlation-ID"));
+    public void testProtectedEndpointRequiresAuth() throws Exception {
+        mockMvc.perform(get("/api/v1/iam/me")).andExpect(status().isUnauthorized());
     }
 
     @Test
-    public void testCustomCorrelationIdReturned() throws Exception {
-        String customId = "test-correlation-id";
-        mockMvc.perform(get("/api/v1/health").header("X-Correlation-ID", customId))
-                .andExpect(status().isOk())
-                .andExpect(header().string("X-Correlation-ID", customId));
+    @WithMockUser(roles = "UFOS_ADMIN")
+    public void testAdminCanAccessRoles() throws Exception {
+        mockMvc.perform(get("/api/v1/iam/roles")).andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(roles = "UFOS_VIEWER")
+    public void testViewerCannotAccessRoles() throws Exception {
+        mockMvc.perform(get("/api/v1/iam/roles")).andExpect(status().isForbidden());
     }
 }

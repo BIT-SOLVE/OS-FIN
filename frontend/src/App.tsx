@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import UserStatus from './components/UserStatus'
+import { apiClient } from './api/client'
 
 function App() {
   const [health, setHealth] = useState<{ status: string, service: string, version: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1';
-
   useEffect(() => {
-    fetch(`${apiBaseUrl}/health`)
-      .then(res => {
+    apiClient('/health')
+      .then((res: any) => {
         if (!res.ok) throw new Error('Failed to fetch health status');
         return res.json();
       })
       .then(data => setHealth(data))
       .catch(err => setError(err.message));
-  }, [apiBaseUrl]);
+  }, []);
 
   return (
     <div className="app-container">
@@ -38,6 +38,8 @@ function App() {
             {error && <p className="error-message">{error}</p>}
           </div>
         </div>
+
+        <UserStatus />
 
         <div className="dashboard-placeholder">
           <h3>Dashboard Placeholder</h3>

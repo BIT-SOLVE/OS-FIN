@@ -22,6 +22,7 @@ This is a legally clean, original implementation based on public domain banking 
 ```bash
 docker compose up -d
 ```
+Keycloak Admin Console: `http://localhost:8081` (admin/admin)
 
 ## How to Run Backend Locally
 ```bash

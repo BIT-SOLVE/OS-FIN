@@ -44,8 +44,8 @@ function Dashboard() {
       <UserStatus />
 
       <div className="dashboard-placeholder">
-        <h3>Dashboard Placeholder</h3>
-        <p>This is where the financial dashboard will be implemented.</p>
+        <h3>Operations Overview</h3>
+        <p>Monitor core modules and service readiness from a single control center.</p>
         <div className="module-grid">
           <div className="module-box">Core Banking</div>
           <div className="module-box">Lending</div>

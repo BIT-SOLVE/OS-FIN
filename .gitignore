@@ -1,0 +1,31 @@
+# Build artifacts
+**/target/
+**/dist/
+**/node_modules/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+**/logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Env files
+.env*.local
+.env
+!.env.example
+
+# Temporary files
+test_results.txt
+test_output.txt
+test_final.txt
+test_report.txt
+test_summary.txt
